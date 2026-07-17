@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emotion Recognition Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ==================== TOP NAVIGATION ==================== -->
+<header class="navbar">
+  <div class="navbar__left">
+    <span class="navbar__logo">🙂</span>
+    <span class="navbar__title">Emotion Recognition Dashboard</span>
+  </div>
+  <div class="navbar__right">
+    <span class="status-pill" id="statusPill">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">Connecting</span>
+    </span>
+    <span class="navbar__clock" id="clock">--:--:--</span>
+  </div>
+</header>
+
+<main class="dashboard">
+
+  <!-- ==================== SECTION 1: LIVE CAMERA ==================== -->
+  <section class="card camera-card">
+    <h2 class="card__heading">Live Camera</h2>
+
+    <div class="camera-wrap" id="cameraWrap">
+      <video id="cameraVideo" autoplay playsinline muted></video>
+      <canvas id="captureCanvas" class="hidden"></canvas>
+
+      <div class="camera-overlay hidden" id="cameraOverlay">
+        <p class="camera-overlay__icon">📷</p>
+        <p class="camera-overlay__text" id="cameraOverlayText">Requesting camera access...</p>
+      </div>
+
+      <div class="capture-flash" id="captureFlash"></div>
+    </div>
+
+    <div class="camera-meta">
+      <span class="camera-meta__item">
+        <span class="status-dot status-dot--small" id="captureDot"></span>
+        <span id="captureStatusText">Idle</span>
+      </span>
+      <span class="camera-meta__item" id="nextCaptureText">Next capture in --s</span>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 2: LATEST CAPTURE ==================== -->
+  <section class="card latest-card">
+    <h2 class="card__heading">Latest Capture</h2>
+
+    <div class="latest-content" id="latestContent">
+      <div class="latest-image-wrap">
+        <img id="latestImage" src="" alt="Latest captured face" class="hidden">
+        <div class="placeholder" id="latestPlaceholder">
+          <p class="placeholder__icon">🖼️</p>
+          <p>No captures yet</p>
+        </div>
+      </div>
+
+      <div class="latest-details">
+        <div class="detail-row">
+          <span class="detail-label">Dominant Emotion</span>
+          <span class="detail-value emotion-badge" id="latestEmotion">--</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Confidence</span>
+          <span class="detail-value" id="latestConfidence">--%</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Capture Time</span>
+          <span class="detail-value" id="latestTime">--</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 3: STATISTICS ==================== -->
+  <section class="stats-grid">
+    <div class="card stat-card">
+      <h2 class="card__heading">😄 Happiest Face</h2>
+      <div class="stat-content" id="happiestContent">
+        <div class="stat-image-wrap">
+          <img id="happiestImage" src="" alt="Happiest captured face" class="hidden">
+          <div class="placeholder placeholder--small" id="happiestPlaceholder">
+            <p class="placeholder__icon">🖼️</p>
+          </div>
+        </div>
+        <div class="stat-details">
+          <div class="detail-row">
+            <span class="detail-label">Emotion</span>
+            <span class="detail-value emotion-badge" id="happiestEmotion">--</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Confidence</span>
+            <span class="detail-value" id="happiestConfidence">--%</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Capture Time</span>
+            <span class="detail-value" id="happiestTime">--</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card stat-card">
+      <h2 class="card__heading">😢 Saddest Face</h2>
+      <div class="stat-content" id="saddestContent">
+        <div class="stat-image-wrap">
+          <img id="saddestImage" src="" alt="Saddest captured face" class="hidden">
+          <div class="placeholder placeholder--small" id="saddestPlaceholder">
+            <p class="placeholder__icon">🖼️</p>
+          </div>
+        </div>
+        <div class="stat-details">
+          <div class="detail-row">
+            <span class="detail-label">Emotion</span>
+            <span class="detail-value emotion-badge" id="saddestEmotion">--</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Confidence</span>
+            <span class="detail-value" id="saddestConfidence">--%</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Capture Time</span>
+            <span class="detail-value" id="saddestTime">--</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION 4: RECENT CAPTURES ==================== -->
+  <section class="card recent-card">
+    <h2 class="card__heading">Recent Captures</h2>
+    <div class="recent-grid" id="recentGrid">
+      <p class="placeholder-text" id="recentEmpty">No recent captures yet.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==================== TOAST CONTAINER ==================== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
